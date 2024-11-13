@@ -1,0 +1,54 @@
+﻿@model TradingERP.Models.DieselMaster
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+<h4>Register</h4>
+
+        <form asp-action="Create" class="row bg-white p-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group col-md-3">
+                <label asp-for="DsmDate" class="control-label"></label>
+            <input asp-for="DsmDate" class="form-control" />
+            <span asp-validation-for="DsmDate" class="text-danger"></span>
+            </div>
+           
+           
+            <div class="form-group col-md-3">
+                <label asp-for="PmpId" class="control-label"></label>
+            <select asp-for="PmpId" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Pump</option>
+                @foreach (var pmp in ViewData["pumpList"] as IEnumerable<PumpMaster>)
+                {
+                    <option value="@pmp.PmpName">@pmp.PmpName</option>
+                }
+            </select>
+                <span asp-validation-for="PmpId" class="text-danger"></span>
+            </div>
+        <div class="form-group col-md-3">
+            <label asp-for="DsmQty" class="control-label"></label>
+            <input asp-for="DsmQty" class="form-control" />
+            <span asp-validation-for="DsmQty" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="DsmAMount" class="control-label"></label>
+            <input asp-for="DsmAMount" class="form-control" />
+            <span asp-validation-for="DsmAMount" class="text-danger"></span>
+        </div>
+           
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+   
+
+
+
+</div>

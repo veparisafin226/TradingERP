@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TradingERP.Models.PartyMaster>
+
+@{
+    ViewData["Title"] = "Parties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+
+    <h1>Party</h1>
+
+    <p class="float-right btn btn-primary">
+        <a class="text-white" asp-action="Create">Create New</a>
+    </p>
+    <table class="table bg-white p-2">
+        <thead>
+            <tr>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.PrtName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrtContactNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrtCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrtStatus)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrtName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrtContactNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrtCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrtStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.PrtId}) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PrtId }, new
+                            {
+                                onclick = "return confirm('Are you sure you want to delete this record?');"
+                            })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+   
+}

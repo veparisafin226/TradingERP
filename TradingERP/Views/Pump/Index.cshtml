@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TradingERP.Models.PumpMaster>
+
+@{
+    ViewData["Title"] = "Dealer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+
+    <h1>Dealer</h1>
+
+    <p class="float-right btn btn-primary">
+        <a class="text-white" asp-action="Create">Create New</a>
+    </p>
+    <table class="table bg-white p-2">
+        <thead>
+            <tr>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.PmpName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PmpAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PmpCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PmpStatus)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmpName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmpAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmpCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmpStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.PmpId}) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PmpId }, new
+                            {
+                                onclick = "return confirm('Are you sure you want to delete this record?');"
+                            })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+   
+}

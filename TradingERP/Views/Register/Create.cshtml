@@ -1,0 +1,117 @@
+﻿@model TradingERP.Models.RegisterMaster
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+<h4>Register</h4>
+
+        <form asp-action="Create" class="row bg-white p-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group col-md-3">
+                <label asp-for="RgmDate" class="control-label"></label>
+                <input asp-for="RgmDate" class="form-control" />
+                <span asp-validation-for="RgmDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmParty" class="control-label"></label>
+            <select asp-for="RgmParty" class="form-control selectpicker" data-live-search="true">
+                    <option value="">Select Party</option>
+                @foreach(var prt in ViewData["partyList"] as IEnumerable<PartyMaster>)
+                {
+                    <option value="@prt.PrtName">@prt.PrtName</option>
+                }
+            </select>
+               
+                <span asp-validation-for="RgmParty" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmSite" class="control-label"></label>
+            <select asp-for="RgmSite" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Site</option>
+                @foreach (var site in ViewData["siteList"] as IEnumerable<SiteMaster>)
+                {
+                    <option value="@site.StmName">@site.StmName</option>
+                }
+            </select>
+                <span asp-validation-for="RgmSite" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmVehicleNo" class="control-label"></label>
+            <select asp-for="RgmVehicleNo" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Vehicle No</option>
+                @foreach (var vn in ViewData["vehicleNoList"] as IEnumerable<VehicleNoMaster>)
+                {
+                    <option value="@vn.VnmNo">@vn.VnmNo</option>
+                }
+            </select>
+                <span asp-validation-for="RgmVehicleNo" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmItem" class="control-label"></label>
+            <select asp-for="RgmItem" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Item</option>
+                @foreach (var itm in ViewData["itemList"] as IEnumerable<ItemMaster>)
+                {
+                    <option value="@itm.ItmName">@itm.ItmName</option>
+                }
+            </select>
+                <span asp-validation-for="RgmItem" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmQty" class="control-label"></label>
+                <input asp-for="RgmQty" class="form-control" />
+                <span asp-validation-for="RgmQty" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmRate" class="control-label"></label>
+                <input asp-for="RgmRate" class="form-control" />
+                <span asp-validation-for="RgmRate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="RgmTotal" class="control-label"></label>
+                <input asp-for="RgmTotal" class="form-control" />
+                <span asp-validation-for="RgmTotal" class="text-danger"></span>
+            </div>
+        <div class="form-group col-md-3">
+            <label asp-for="RgmDriver" class="control-label"></label>
+            <select asp-for="RgmDriver" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Driver</option>
+                @foreach (var drv in ViewData["driverList"] as IEnumerable<DriverMaster>)
+                {
+                    <option value="@drv.DrmName">@drv.DrmName</option>
+                }
+            </select>
+            <span asp-validation-for="RgmDriver" class="text-danger"></span>
+        </div>
+       
+       
+           
+            <div class="form-group col-md-3">
+                <label asp-for="RgmDealer" class="control-label"></label>
+            <select asp-for="RgmDealer" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Dealer</option>
+                @foreach (var dlr in ViewData["dealerList"] as IEnumerable<DealerMaster>)
+                {
+                    <option value="@dlr.DlrName">@dlr.DlrName</option>
+                }
+            </select>
+                <span asp-validation-for="RgmDealer" class="text-danger"></span>
+            </div>
+           
+           
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+   
+
+
+
+</div>

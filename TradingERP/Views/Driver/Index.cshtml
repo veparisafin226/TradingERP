@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TradingERP.Models.DriverMaster>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+
+    <h1>Drivers</h1>
+
+    <p class="float-right btn btn-primary">
+        <a class="text-white" asp-action="Create">Create New</a>
+    </p>
+    <table class="table bg-white p-2">
+        <thead>
+            <tr>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.DrmName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DrmContactNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DrmStatus)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrmName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrmContactNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrmStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.DrmId}) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.DrmId }, new
+                            {
+                                onclick = "return confirm('Are you sure you want to delete this record?');"
+                            })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+   
+}
