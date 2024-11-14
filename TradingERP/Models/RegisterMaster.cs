@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TradingERP.Models
 {
+    [BsonIgnoreExtraElements]
     public class RegisterMaster
     {
         [BsonId]
