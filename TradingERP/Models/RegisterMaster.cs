@@ -11,7 +11,7 @@ namespace TradingERP.Models
         public string RgmId { get; set; }
 
         [Display(Name ="Date")]
-        public DateTime RgmDate { get; set; }
+        public DateTimeOffset RgmDate { get; set; }
         [Display(Name = "Party")]
         public string RgmParty { get; set; }
         [Display(Name = "Site")]
@@ -30,8 +30,8 @@ namespace TradingERP.Models
         [Display(Name = "Dealer")]
         public string RgmDealer { get; set; }
        
-        [Display(Name = "Driver")]
-        public string RgmDriver { get; set; }
+        [Display(Name = "Type")]
+        public string RgmType { get; set; }
         //[Display(Name = "Pump")]
         //public string RgmPump { get; set; }
         //[Display(Name = "Diesel")]

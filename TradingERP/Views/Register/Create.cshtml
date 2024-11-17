@@ -14,7 +14,7 @@
             
             <div class="form-group col-md-3">
                 <label asp-for="RgmDate" class="control-label"></label>
-                <input asp-for="RgmDate" class="form-control" />
+                <input asp-for="RgmDate" type="text" class="form-control datepicker-here" data-language="en" />
                 <span asp-validation-for="RgmDate" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
@@ -63,21 +63,46 @@
                 <span asp-validation-for="RgmItem" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
-                <label asp-for="RgmQty" class="control-label"></label>
-                <input asp-for="RgmQty" class="form-control" />
-                <span asp-validation-for="RgmQty" class="text-danger"></span>
+                <label asp-for="RgmType" class="control-label"></label>
+            <select asp-for="RgmType" class="form-control selectpicker" data-live-search="true"  >
+               <option value="Liz">Liz</option>
+               <option value="Dealer">Dealer</option>
+            </select>
+                <span asp-validation-for="RgmType" class="text-danger"></span>
             </div>
-            <div class="form-group col-md-3">
-                <label asp-for="RgmRate" class="control-label"></label>
-                <input asp-for="RgmRate" class="form-control" />
-                <span asp-validation-for="RgmRate" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-3">
-                <label asp-for="RgmTotal" class="control-label"></label>
-                <input asp-for="RgmTotal" class="form-control" />
-                <span asp-validation-for="RgmTotal" class="text-danger"></span>
-            </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3" style="display:none;" id="dealerDiv">
+            <label asp-for="RgmDealer" class="control-label"></label>
+            <select asp-for="RgmDealer" class="form-control selectpicker" data-live-search="true">
+                <option value="">Select Dealer</option>
+                @foreach (var dlr in ViewData["dealerList"] as IEnumerable<DealerMaster>)
+                {
+                    <option value="@dlr.DlrName">@dlr.DlrName</option>
+                }
+            </select>
+            <span asp-validation-for="RgmDealer" class="text-danger"></span>
+        </div>
+      
+        
+           <div class="col-md-12">
+               <div class="row">
+                <div class="form-group col-md-3" id="QtyDiv">
+                    <label asp-for="RgmQty" class="control-label"></label>
+                    <input asp-for="RgmQty"  class="form-control" />
+                    <span asp-validation-for="RgmQty" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3" id="RateDiv">
+                    <label asp-for="RgmRate" class="control-label"></label>
+                    <input asp-for="RgmRate"  class="form-control" />
+                    <span asp-validation-for="RgmRate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3" id="TotalDiv">
+                    <label asp-for="RgmTotal" class="control-label"></label>
+                    <input asp-for="RgmTotal" class="form-control" />
+                    <span asp-validation-for="RgmTotal" class="text-danger"></span>
+                </div>
+              </div>
+           </div>
+       @*  <div class="form-group col-md-3">
             <label asp-for="RgmDriver" class="control-label"></label>
             <select asp-for="RgmDriver" class="form-control selectpicker" data-live-search="true">
                 <option value="">Select Driver</option>
@@ -87,25 +112,15 @@
                 }
             </select>
             <span asp-validation-for="RgmDriver" class="text-danger"></span>
-        </div>
+        </div> *@
        
        
            
-            <div class="form-group col-md-3">
-                <label asp-for="RgmDealer" class="control-label"></label>
-            <select asp-for="RgmDealer" class="form-control selectpicker" data-live-search="true">
-                <option value="">Select Dealer</option>
-                @foreach (var dlr in ViewData["dealerList"] as IEnumerable<DealerMaster>)
-                {
-                    <option value="@dlr.DlrName">@dlr.DlrName</option>
-                }
-            </select>
-                <span asp-validation-for="RgmDealer" class="text-danger"></span>
-            </div>
+           
            
            
             
-            <div class="form-group">
+            <div class="form-group col-md-12">
                 <input type="submit" value="Create" class="btn btn-primary" />
             <a class="btn btn-secondary" asp-action="Index">Back to List</a>
             </div>
@@ -115,3 +130,4 @@
 
 
 </div>
+
