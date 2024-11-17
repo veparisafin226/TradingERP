@@ -6,6 +6,10 @@ namespace TradingERP.Controllers
     {
         public IActionResult Index()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
     }

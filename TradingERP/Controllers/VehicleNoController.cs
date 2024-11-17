@@ -13,6 +13,10 @@ namespace TradingERP.Controllers
         }
         public IActionResult Index()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             var data = _vehicleNoService.ListByUser(userId);
             return View(data);
@@ -20,13 +24,20 @@ namespace TradingERP.Controllers
 
         public IActionResult Create()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(VehicleNoMaster vnm)
         {
-
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 vnm.UsmId = Request.Cookies["admToken"];
@@ -49,6 +60,10 @@ namespace TradingERP.Controllers
 
         public IActionResult Edit(string id)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var data = _vehicleNoService.GetById(id);
             return View(data);
         }
@@ -56,7 +71,10 @@ namespace TradingERP.Controllers
         [HttpPost]
         public IActionResult Edit(string id, VehicleNoMaster vnm)
         {
-
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var data = _vehicleNoService.Update(id, vnm);
@@ -78,6 +96,10 @@ namespace TradingERP.Controllers
 
         public IActionResult Delete(string id)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var data = _vehicleNoService.Delete(id);
             return RedirectToAction("Index");
         }

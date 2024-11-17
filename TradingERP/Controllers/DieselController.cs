@@ -15,6 +15,10 @@ namespace TradingERP.Controllers
         }
         public IActionResult Index()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             var data = _dieselService.ListByUser(userId);
             return View(data);
@@ -22,6 +26,10 @@ namespace TradingERP.Controllers
 
         public IActionResult Create()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
             return View();
@@ -30,6 +38,10 @@ namespace TradingERP.Controllers
         [HttpPost]
         public IActionResult Create(DieselMaster dsm)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
             try
@@ -54,6 +66,10 @@ namespace TradingERP.Controllers
 
         public IActionResult Edit(string id)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
             var data = _dieselService.GetById(id);
@@ -63,6 +79,10 @@ namespace TradingERP.Controllers
         [HttpPost]
         public IActionResult Edit(string id, DieselMaster dsm)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
             try
@@ -86,6 +106,10 @@ namespace TradingERP.Controllers
 
         public IActionResult Delete(string id)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var data = _dieselService.Delete(id);
             return RedirectToAction("Index");
         }

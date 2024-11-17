@@ -52,6 +52,13 @@ namespace TradingERP.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("admName");
+            Response.Cookies.Delete("admToken");
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();

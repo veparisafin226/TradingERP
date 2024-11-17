@@ -29,6 +29,10 @@ namespace TradingERP.Controllers
         }
         public IActionResult Index()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["AdmToken"];
             var data = _registerService.ListByUser(userId);
             return View(data);
@@ -36,6 +40,10 @@ namespace TradingERP.Controllers
 
         public IActionResult Create()
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             ViewData["partyList"]=_partyService.ActiveListByUser(userId);
             ViewData["siteList"] = _siteService.ActiveListByUser(userId);
@@ -50,6 +58,10 @@ namespace TradingERP.Controllers
         [HttpPost]
         public IActionResult Create(RegisterMaster rgm)
         {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var userId = Request.Cookies["admToken"];
             ViewData["partyList"] = _partyService.ActiveListByUser(userId);
             ViewData["siteList"] = _siteService.ActiveListByUser(userId);
