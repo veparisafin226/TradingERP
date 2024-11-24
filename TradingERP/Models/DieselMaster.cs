@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TradingERP.Models
 {
+    [BsonIgnoreExtraElements]
     public class DieselMaster
     {
         [BsonId]
@@ -11,7 +12,11 @@ namespace TradingERP.Models
         public string UsmId { get; set; }
         [Display(Name ="Date")]
         [Required]
-        public DateTime DsmDate { get; set; }
+        public DateTimeOffset DsmDate { get; set; }
+
+        [Display(Name = "Driver")]
+        [Required]
+        public string DsmDriver { get; set; }
         [Display(Name = "Pump Station")]
         [Required]
         public string PmpId { get; set; }

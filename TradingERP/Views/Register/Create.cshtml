@@ -17,51 +17,63 @@
                 <input asp-for="RgmDate" type="text" class="form-control datepicker-here" data-language="en" />
                 <span asp-validation-for="RgmDate" class="text-danger"></span>
             </div>
-            <div class="form-group col-md-3">
-                <label asp-for="RgmParty" class="control-label"></label>
+            <div class="form-group col-md-3" >
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="control-label" asp-for="RgmParty"></label>
+                <i id="addParty" class="fa fa-plus"></i>
+            </div>
             <select asp-for="RgmParty" class="form-control selectpicker" data-live-search="true">
-                    <option value="">Select Party</option>
-                @foreach(var prt in ViewData["partyList"] as IEnumerable<PartyMaster>)
-                {
-                    <option value="@prt.PrtName">@prt.PrtName</option>
-                }
+                
             </select>
-               
-                <span asp-validation-for="RgmParty" class="text-danger"></span>
+
+            <span asp-validation-for="RgmParty" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
-                <label asp-for="RgmSite" class="control-label"></label>
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="control-label" asp-for="RgmSite"></label>
+                <i id="addSite" class="fa fa-plus"></i>
+            </div>
             <select asp-for="RgmSite" class="form-control selectpicker" data-live-search="true">
-                <option value="">Select Site</option>
-                @foreach (var site in ViewData["siteList"] as IEnumerable<SiteMaster>)
-                {
-                    <option value="@site.StmName">@site.StmName</option>
-                }
+                
             </select>
                 <span asp-validation-for="RgmSite" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
-                <label asp-for="RgmVehicleNo" class="control-label"></label>
+                
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="control-label" asp-for="RgmVehicleNo"></label>
+                <i id="addVn" class="fa fa-plus"></i>
+            </div>
             <select asp-for="RgmVehicleNo" class="form-control selectpicker" data-live-search="true">
-                <option value="">Select Vehicle No</option>
-                @foreach (var vn in ViewData["vehicleNoList"] as IEnumerable<VehicleNoMaster>)
-                {
-                    <option value="@vn.VnmNo">@vn.VnmNo</option>
-                }
+               
             </select>
                 <span asp-validation-for="RgmVehicleNo" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
-                <label asp-for="RgmItem" class="control-label"></label>
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="control-label" asp-for="RgmItem"></label>
+                <i id="addItem" class="fa fa-plus"></i>
+            </div>
             <select asp-for="RgmItem" class="form-control selectpicker" data-live-search="true">
-                <option value="">Select Item</option>
-                @foreach (var itm in ViewData["itemList"] as IEnumerable<ItemMaster>)
-                {
-                    <option value="@itm.ItmName">@itm.ItmName</option>
-                }
+               
             </select>
                 <span asp-validation-for="RgmItem" class="text-danger"></span>
             </div>
+        <div class="form-group col-md-3" >
+            <label asp-for="RgmQty" class="control-label"></label>
+            <input asp-for="RgmQty" class="form-control" />
+            <span asp-validation-for="RgmQty" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="RgmRate" class="control-label"></label>
+            <input asp-for="RgmRate" class="form-control" />
+            <span asp-validation-for="RgmRate" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="RgmTotal" class="control-label"></label>
+            <input asp-for="RgmTotal" class="form-control" />
+            <span asp-validation-for="RgmTotal" class="text-danger"></span>
+        </div>
             <div class="form-group col-md-3">
                 <label asp-for="RgmType" class="control-label"></label>
             <select asp-for="RgmType" class="form-control selectpicker" data-live-search="true"  >
@@ -71,37 +83,28 @@
                 <span asp-validation-for="RgmType" class="text-danger"></span>
             </div>
         <div class="form-group col-md-3" style="display:none;" id="dealerDiv">
-            <label asp-for="RgmDealer" class="control-label"></label>
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="control-label" asp-for="RgmDealer"></label>
+                <i id="addDealer" class="fa fa-plus"></i>
+            </div>
             <select asp-for="RgmDealer" class="form-control selectpicker" data-live-search="true">
-                <option value="">Select Dealer</option>
-                @foreach (var dlr in ViewData["dealerList"] as IEnumerable<DealerMaster>)
-                {
-                    <option value="@dlr.DlrName">@dlr.DlrName</option>
-                }
+                
             </select>
             <span asp-validation-for="RgmDealer" class="text-danger"></span>
         </div>
-      
+        <div class="form-group col-md-3" id="RateDiv">
+            <label asp-for="RgmRate1" class="control-label"></label>
+            <input asp-for="RgmRate1" class="form-control" />
+            <span asp-validation-for="RgmRate1" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3" id="TotalDiv">
+            <label asp-for="RgmTotal1" class="control-label"></label>
+            <input asp-for="RgmTotal1" class="form-control" />
+            <span asp-validation-for="RgmTotal1" class="text-danger"></span>
+        </div>
         
-           <div class="col-md-12">
-               <div class="row">
-                <div class="form-group col-md-3" id="QtyDiv">
-                    <label asp-for="RgmQty" class="control-label"></label>
-                    <input asp-for="RgmQty"  class="form-control" />
-                    <span asp-validation-for="RgmQty" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3" id="RateDiv">
-                    <label asp-for="RgmRate" class="control-label"></label>
-                    <input asp-for="RgmRate"  class="form-control" />
-                    <span asp-validation-for="RgmRate" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3" id="TotalDiv">
-                    <label asp-for="RgmTotal" class="control-label"></label>
-                    <input asp-for="RgmTotal" class="form-control" />
-                    <span asp-validation-for="RgmTotal" class="text-danger"></span>
-                </div>
-              </div>
-           </div>
+          
        @*  <div class="form-group col-md-3">
             <label asp-for="RgmDriver" class="control-label"></label>
             <select asp-for="RgmDriver" class="form-control selectpicker" data-live-search="true">
@@ -131,3 +134,203 @@
 
 </div>
 
+<div class="modal" id="dealerModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Dealer</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="dlrName" name="dlrName" required data-val="true" data-val-required="Please enter name" />
+                            <span class="text-danger" id="dlrNameMsg" data-valmsg-for="dlrName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Contact No</label>
+                            <input type="text" class="form-control" id="dlrContact" name="dlrContact" required data-val="true" data-val-required="Please enter contact no" />
+                            <span class="text-danger" id="dlrContactMsg" data-valmsg-for="dlrContact" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>City</label>
+                            <input type="text" class="form-control" id="dlrCity" name="dlrCity"  />
+                            <span class="text-danger" data-valmsg-for="dlrCity" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <p id="cstmDealerLoader" style="display:none;" class="text-danger p-2">Please wait...</p>
+                <button class="btn btn-primary" type="button" id="btnAddDealer">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="itemModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Item</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Item Name</label>
+                            <input type="text" class="form-control" id="itmName" name="itmName" required data-val="true" data-val-required="Please enter name" />
+                            <span class="text-danger" id="itmMsg" data-valmsg-for="itmName" data-valmsg-replace="true"></span>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <p id="cstmItemLoader" style="display:none;" class="text-danger p-2">Please wait...</p>
+                <button class="btn btn-primary" type="button" id="btnAddItem">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="VnModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Vehicle No</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Vehicle No</label>
+                            <input type="text" class="form-control" id="vnmNo" name="vnmNo" required data-val="true" data-val-required="Please enter no" />
+                            <span class="text-danger" id="vnmNoMsg" data-valmsg-for="vnmNo" data-valmsg-replace="true"></span>
+                        </div>
+                       
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <p id="cstmVnLoader" style="display:none;" class="text-danger p-2">Please wait...</p>
+                <button class="btn btn-primary" type="button" id="btnAddVn">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="siteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Site</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="stmName" name="stmName" required data-val="true" data-val-required="Please enter name" />
+                            <span class="text-danger" id="stmNameMsg" data-valmsg-for="stmName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Address</label>
+                            <input type="text" class="form-control" id="stmAddress" name="stmAddress" />
+                            <span class="text-danger" data-valmsg-for="stmAddress" data-valmsg-replace="true"></span>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <p id="cstmSiteLoader" style="display:none;" class="text-danger p-2">Please wait...</p>
+                <button class="btn btn-primary" type="button" id="btnAddSite">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="partyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Party</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="prtName" name="prtName" required data-val="true" data-val-required="Please enter name" />
+                            <span class="text-danger" id="prtNameMsg" data-valmsg-for="prtName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Contact</label>
+                            <input type="text" class="form-control" id="prtContact" name="prtName" />
+                            <span class="text-danger" data-valmsg-for="prtContact" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>City</label>
+                            <input type="text" class="form-control" id="prtCity" name="prtCity" />
+                            <span class="text-danger" data-valmsg-for="prtCity" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <p id="cstmLoader" style="display:none;" class="text-danger p-2">Please wait...</p>
+                <button class="btn btn-primary" type="button" id="btnAddParty">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/Register.js"></script>

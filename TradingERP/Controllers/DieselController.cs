@@ -8,10 +8,12 @@ namespace TradingERP.Controllers
     {
         private readonly DieselService _dieselService;
         private readonly PumpService _pumpService;
-        public DieselController(DieselService dieselService,PumpService pumpService)
+        private readonly DriverService _driverService;
+        public DieselController(DieselService dieselService,PumpService pumpService, DriverService driverService)
         {
             _dieselService = dieselService;
             _pumpService = pumpService;
+            _driverService = driverService;
         }
         public IActionResult Index()
         {
@@ -32,6 +34,7 @@ namespace TradingERP.Controllers
             }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
+            ViewData["driverList"]=_driverService.ActiveListByUser(userId);
             return View();
         }
 
@@ -44,6 +47,7 @@ namespace TradingERP.Controllers
             }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
+            ViewData["driverList"] = _driverService.ActiveListByUser(userId);
             try
             {
                 dsm.UsmId = Request.Cookies["admToken"];
@@ -72,6 +76,7 @@ namespace TradingERP.Controllers
             }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
+            ViewData["driverList"] = _driverService.ActiveListByUser(userId);
             var data = _dieselService.GetById(id);
             return View(data);
         }
@@ -85,6 +90,7 @@ namespace TradingERP.Controllers
             }
             var userId = Request.Cookies["admToken"];
             ViewData["pumpList"] = _pumpService.ActiveListByUser(userId);
+            ViewData["driverList"] = _driverService.ActiveListByUser(userId);
             try
             {
                 var data = _dieselService.Update(id, dsm);

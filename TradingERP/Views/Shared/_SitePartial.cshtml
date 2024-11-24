@@ -1,0 +1,6 @@
+﻿@model IEnumerable<TradingERP.Models.SiteMaster>
+    <option value="">Select Site</option>
+    @foreach (var site in Model)
+    {
+        <option value="@site.StmName">@site.StmName</option>
+    }

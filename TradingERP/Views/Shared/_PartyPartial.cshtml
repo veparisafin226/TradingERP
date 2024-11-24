@@ -1,0 +1,6 @@
+﻿@model IEnumerable<TradingERP.Models.PartyMaster>
+    <option value="">Select Party</option>
+    @foreach (var prt in Model)
+    {
+        <option value="@prt.PrtName">@prt.PrtName</option>
+    }

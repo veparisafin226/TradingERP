@@ -1,0 +1,6 @@
+﻿@model IEnumerable<TradingERP.Models.VehicleNoMaster>
+    <option value="">Select Vehicle No</option>
+    @foreach (var vn in Model)
+    {
+        <option value="@vn.VnmNo">@vn.VnmNo</option>
+    }
