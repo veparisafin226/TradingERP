@@ -12,6 +12,7 @@ builder.Services.AddSingleton<DriverService>();
 builder.Services.AddSingleton<PartyService>();
 builder.Services.AddSingleton<SiteService>();
 builder.Services.AddSingleton<DealerService>();
+builder.Services.AddSingleton<LizService>();
 builder.Services.AddSingleton<VehicleNoService>();
 builder.Services.AddSingleton<ItemService>();
 builder.Services.AddSingleton<PumpService>();

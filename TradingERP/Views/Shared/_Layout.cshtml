@@ -19,6 +19,11 @@
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/css/datepicker1.css" rel="stylesheet" />
+    <style>
+        table{
+            font-size:13px !important;
+        }
+    </style>
     <script src="~/js/jquery.min.js"></script>
 </head>
 
@@ -69,6 +74,9 @@
                         </a>
                         <a class="collapse-item" asp-action="Index" asp-controller="Dealer">
                             <span>Dealer</span>
+                        </a>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Liz">
+                            <span>Liz</span>
                         </a>
                         <a class="collapse-item" asp-action="Index" asp-controller="VehicleNo">
                             <span>Vehicle No</span>
@@ -251,7 +259,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+    
    
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
@@ -263,8 +271,8 @@
     <!-- Page level custom scripts -->
     <script src="~/js/demo/chart-area-demo.js"></script>
     <script src="~/js/demo/chart-pie-demo.js"></script>
-    <script src="~/js/Register.js"></script>
-    <script src="~/js/partial.js"></script>
+   
+    
     
    
     

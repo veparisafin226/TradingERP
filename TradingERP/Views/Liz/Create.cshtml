@@ -1,0 +1,53 @@
+﻿@model TradingERP.Models.LizMaster
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+
+
+    <h3>New Liz</h3>
+
+   
+        
+            <form asp-action="Create" class="row bg-white p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="form-group col-md-6">
+                    <label asp-for="LzmName" class="control-label"></label>
+            <input asp-for="LzmName" class="form-control" />
+            <span asp-validation-for="LzmName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="LzmContactNo" class="control-label"></label>
+            <input asp-for="LzmContactNo" class="form-control" />
+            <span asp-validation-for="LzmContactNo" class="text-danger"></span>
+                </div>
+        <div class="form-group col-md-6">
+            <label asp-for="LzmCity" class="control-label"></label>
+            <input asp-for="LzmCity" class="form-control" />
+            <span asp-validation-for="LzmCity" class="text-danger"></span>
+        </div>
+        
+                <p class="text-danger">
+            @ViewBag.response
+                </p>
+                <div class="form-group col-12 text-right">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+            <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+                </div>
+            </form>
+       
+   
+
+   
+
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

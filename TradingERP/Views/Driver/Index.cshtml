@@ -42,12 +42,8 @@
                         @Html.DisplayFor(modelItem => item.DrmStatus)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new {  id=item.DrmId}) |
-
-                        @Html.ActionLink("Delete", "Delete", new { id = item.DrmId }, new
-                            {
-                                onclick = "return confirm('Are you sure you want to delete this record?');"
-                            })
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Driver", new { id = item.DrmId })"><i class="fa fa-pen"></i></a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Driver", new { id = item.DrmId })" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             }

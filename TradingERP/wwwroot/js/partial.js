@@ -4,6 +4,7 @@ $(document).ready(function () {
     loadVehicleNo();
     loadItem();
     loadDealer();
+    loadLiz();
 });
 
 
@@ -213,6 +214,7 @@ function loadDealer() {
         url: '/Partial/DealerList',
         type: 'GET',
         success: function (data) {
+            console.log(data);
             $("#RgmDealer").html(data);
             $("#RgmDealer").html(data).selectpicker('refresh');
         }
@@ -255,6 +257,60 @@ $("#btnAddDealer").click(function () {
                 }
                 $("#dealerModal").modal("hide");
                 $("#cstmDealerLoader").hide();
+            }
+        });
+    }
+});
+
+
+function loadLiz() {
+
+    $.ajax({
+        url: '/Partial/LizList',
+        type: 'GET',
+        success: function (data) {
+            $("#RgmLiz").html(data);
+            $("#RgmLiz").html(data).selectpicker('refresh');
+        }
+    });
+}
+
+
+
+
+$("#addLiz").click(function () {
+    $("#lizModal").modal("show");
+});
+
+$("#btnAddLiz").click(function () {
+    $("#cstmLizLoader").show();
+    var lzmName = $("#lzmName").val();
+    var lzmContact = $("#lzmContact").val();
+    var lzmCity = $("#lzmCity").val();
+
+    if (lzmName.trim().length == 0) {
+        $("#lzmNameMsg").html("Please enter name");
+    }
+    else if (lzmContact.trim().length == 0) {
+        $("#lzmContactMsg").html("Please enter contact no");
+    }
+    else {
+        $("#lzmNameMsg").html("");
+        $("#lzmContactMsg").html("");
+        $.ajax({
+            url: '/Partial/AddLiz',
+            type: 'POST',
+            data: { LzmName: lzmName, LzmContact: lzmContact, LzmCity: lzmCity },
+            success: function (response) {
+                if (response == "Success") {
+                    loadLiz();
+                }
+
+                else {
+                    alert("Error Occurred");
+                }
+                $("#lizModal").modal("hide");
+                $("#cstmLizLoader").hide();
             }
         });
     }

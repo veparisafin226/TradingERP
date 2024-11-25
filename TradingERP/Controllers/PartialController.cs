@@ -11,13 +11,15 @@ namespace TradingERP.Controllers
         private readonly VehicleNoService _vehicleNoService;
         private readonly ItemService _itemService;
         private readonly DealerService _dealerService;
-        public PartialController(PartyService partyService, SiteService siteService, VehicleNoService vehicleNoService, ItemService itemService, DealerService dealerService)
+        private readonly LizService _lizService;
+        public PartialController(PartyService partyService, SiteService siteService, VehicleNoService vehicleNoService, ItemService itemService, DealerService dealerService, LizService lizService)
         {
             _partyService = partyService;
             _siteService = siteService;
             _vehicleNoService = vehicleNoService;
             _itemService = itemService;
             _dealerService = dealerService;
+            _lizService = lizService;
         }
         public IActionResult Index()
         {
@@ -134,6 +136,30 @@ namespace TradingERP.Controllers
                 var userId = Request.Cookies["AdmToken"];
                 dlr.UsmId = userId;
                 var result = _dealerService.Create(dlr);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                return Json("Erro Occurred");
+            }
+        }
+
+        public IActionResult LizList()
+        {
+            var userId = Request.Cookies["AdmToken"];
+            var dealerList = _lizService.ActiveListByUser(userId);
+            return PartialView("_LizPartial", dealerList);
+        }
+
+
+        [HttpPost]
+        public IActionResult AddLiz(LizMaster lzm)
+        {
+            try
+            {
+                var userId = Request.Cookies["AdmToken"];
+                lzm.UsmId = userId;
+                var result = _lizService.Create(lzm);
                 return Json(result);
             }
             catch (Exception ex)

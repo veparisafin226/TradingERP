@@ -29,6 +29,8 @@ namespace TradingERP.Models
        
         [Display(Name = "Dealer")]
         public string RgmDealer { get; set; }
+        [Display(Name = "Liz")]
+        public string RgmLiz { get; set; }
         [Display(Name = "Rate")]
         public string RgmRate1 { get; set; }
         [Display(Name = "Total")]

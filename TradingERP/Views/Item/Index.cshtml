@@ -38,12 +38,10 @@
                         @Html.DisplayFor(modelItem => item.ItmStatus)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new {  id=item.ItmId}) |
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Item", new { id = item.ItmId })"><i class="fa fa-pen"></i></a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Item", new { id = item.ItmId })" onclick = "return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash"></i></a>
 
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ItmId }, new
-                            {
-                                onclick = "return confirm('Are you sure you want to delete this record?');"
-                            })
+                       
                     </td>
                 </tr>
             }

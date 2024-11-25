@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TradingERP.Models.LizMaster>
+
+@{
+    ViewData["Title"] = "Liz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+
+    <h1>Liz</h1>
+
+    <p class="float-right btn btn-primary">
+        <a class="text-white" asp-action="Create">Create New</a>
+    </p>
+    <table class="table bg-white p-2">
+        <thead>
+            <tr>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.LzmName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LzmContactNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LzmCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LzmStatus)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LzmName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LzmContactNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LzmCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LzmStatus)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Liz", new { id = item.LzmId })"><i class="fa fa-pen"></i></a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Liz", new { id = item.LzmId })" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+   
+}

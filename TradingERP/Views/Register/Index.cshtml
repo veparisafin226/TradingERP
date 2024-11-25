@@ -44,7 +44,7 @@
                     @Html.DisplayNameFor(model => model.RgmType)
                 </th>
             <th>
-                @Html.DisplayNameFor(model => model.RgmDealer)
+                Liz/Dealer
             </th>
                 <th>
                     @Html.DisplayNameFor(model => model.RgmRate1)
@@ -54,7 +54,7 @@
                 </th>
            
            
-           @*  <th></th> *@
+             <th></th> 
         </tr>
     </thead>
     <tbody>
@@ -88,8 +88,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.RgmType)
                     </td>
+                    
             <td>
-                @Html.DisplayFor(modelItem => item.RgmDealer)
+                @if(item.RgmType=="Liz")
+                {
+                            @Html.DisplayFor(modelItem => item.RgmLiz)
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.RgmDealer)
+                        }
+                        
             </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RgmRate1)
@@ -99,12 +108,11 @@
                     </td>
            
            
-           @* 
+           
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td> *@
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Register", new { id = item.RgmId })"><i class="fa fa-pen"></i></a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Register", new { id = item.RgmId })" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash"></i></a>
+            </td> 
         </tr>
 }
     </tbody>

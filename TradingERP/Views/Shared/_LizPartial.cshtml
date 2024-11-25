@@ -1,0 +1,6 @@
+﻿@model IEnumerable<TradingERP.Models.LizMaster>
+    <option value="">Select Liz</option>
+    @foreach (var lzm in Model)
+    {
+    <option value="@lzm.LzmName">@lzm.LzmName</option>
+    }

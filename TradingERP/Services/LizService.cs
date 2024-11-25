@@ -1,30 +1,39 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using TradingERP.Models;
 
 namespace TradingERP.Services
 {
-    public class RegisterService
+    public class LizService
     {
-        private readonly IMongoCollection<RegisterMaster> registerMaster;
-        public RegisterService(IOptions<DatabaseConfig> dbConfig)
+        private readonly IMongoCollection<LizMaster> lizMaster;
+        public LizService(IOptions<DatabaseConfig> dbConfig)
         {
             var client = new MongoClient(dbConfig.Value.ConnectionString);
             var database = client.GetDatabase(dbConfig.Value.DatabaseName);
-            registerMaster = database.GetCollection<RegisterMaster>("RegisterMaster");
+            lizMaster = database.GetCollection<LizMaster>("LizMaster");
         }
-        public List<RegisterMaster> ListByUser(string userId)
+
+        public List<LizMaster> ListByUser(string userId)
         {
-            var data = registerMaster.Find(t => t.UsmId == userId).ToList().OrderByDescending(t => t.RgmDate).ToList();
+            var data = lizMaster.Find(t => t.UsmId == userId).ToList().OrderBy(t => t.LzmName).ToList();
             return data;
         }
 
-        public string Create(RegisterMaster rgm)
+        public List<LizMaster> ActiveListByUser(string userId)
+        {
+            var data = lizMaster.Find(t => t.UsmId == userId && t.LzmStatus == true).ToList().OrderBy(t => t.LzmName).ToList();
+            return data;
+        }
+
+        public string Create(LizMaster lzm)
         {
             var response = "";
             try
             {
-                registerMaster.InsertOne(rgm);
+                lzm.LzmStatus = true;
+                lizMaster.InsertOne(lzm);
                 response = "Success";
             }
             catch (Exception ex)
@@ -34,19 +43,13 @@ namespace TradingERP.Services
             return response;
         }
 
-        public RegisterMaster GetById(string id)
-        {
-            var data = registerMaster.Find(t=>t.RgmId == id).FirstOrDefault();
-            return data;
-        }
-
-        public string Update(String id, RegisterMaster rgm)
+        public string Update(String id, LizMaster lzm)
         {
             var response = "";
             try
             {
-                rgm.RgmId = id;
-                registerMaster.ReplaceOne(t => t.RgmId == id, rgm);
+                lzm.LzmId = id;
+                lizMaster.ReplaceOne(t => t.LzmId == id, lzm);
                 response = "Success";
             }
             catch (Exception ex)
@@ -54,6 +57,12 @@ namespace TradingERP.Services
                 response = "Error Occurred";
             }
             return response;
+        }
+
+        public LizMaster GetById(string id)
+        {
+            var data = lizMaster.Find(t => t.LzmId == id).FirstOrDefault();
+            return data;
         }
 
         public string Delete(String id)
@@ -61,7 +70,7 @@ namespace TradingERP.Services
             var response = "";
             try
             {
-                var result = registerMaster.DeleteOne(t => t.RgmId == id);
+                var result = lizMaster.DeleteOne(t => t.LzmId == id);
 
                 response = result.IsAcknowledged && result.DeletedCount > 0
                     ? "Success"
