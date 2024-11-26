@@ -52,7 +52,7 @@ namespace TradingERP.Controllers
                 }
                 if (toDate.ToString("dd-MM-yyyy") != "01-01-0001")
                 {
-                    ViewBag.toDate = Convert.ToDateTime(toDate).ToString("dd-MM-yyyy");
+                    ViewBag.toDate = toDate.ToString("dd-MM-yyyy");
                 }
 
                 var data = _reportService.RgReportByParty(userId, party, fromDate.ToString("dd-MM-yyyy"), toDate.ToString("dd-MM-yyyy"));
