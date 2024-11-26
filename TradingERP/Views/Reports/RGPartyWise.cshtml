@@ -194,10 +194,10 @@
     }
    
     $("#btnExcel").click(function () {
-        
+        var fleName = '@ViewBag.party' + '.xls';
         var table = $('#tblReport');
         $(table).table2excel({
-            filename: "demo.xls"
+            filename: fleName
         });
     });
 </script>
