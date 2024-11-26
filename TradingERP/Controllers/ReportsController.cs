@@ -46,15 +46,8 @@ namespace TradingERP.Controllers
                 ViewData["userData"] = userInfo;
                 ViewData["partyList"] = _partyService.ActiveListByUser(userId);
                 ViewBag.party = party;
-                if (fromDate.ToString("dd-MM-yyyy") != "01-01-0001")
-                {
-                    ViewBag.fDate = fromDate.ToString("dd-MM-yyyy");
-                }
-                if (toDate.ToString("dd-MM-yyyy") != "01-01-0001")
-                {
-                    ViewBag.tDate = toDate.ToString("dd-MM-yyyy");
-                }
-
+                ViewBag.fDate = fromDate.ToString("dd-MM-yyyy");
+                ViewBag.tDate = toDate.ToString("dd-MM-yyyy");
                 var data = _reportService.RgReportByParty(userId, party, fromDate.ToString("dd-MM-yyyy"), toDate.ToString("dd-MM-yyyy"));
                 return View(data);
             }
