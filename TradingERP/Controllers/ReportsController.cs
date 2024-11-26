@@ -46,10 +46,10 @@ namespace TradingERP.Controllers
                 ViewData["userData"] = userInfo;
                 ViewData["partyList"] = _partyService.ActiveListByUser(userId);
                 ViewBag.party = rf.party;
-                ViewBag.fDate = rf.fromDate;
-                ViewBag.tDate = rf.toDate;
+                ViewBag.fDate = rf.fromDate.ToString("dd-MM-yyyy");
+                ViewBag.tDate = rf.toDate.ToString("dd-MM-yyyy");
                
-                var data = _reportService.RgReportByParty(userId, rf.party, rf.fromDate, rf.toDate);
+                var data = _reportService.RgReportByParty(userId, rf.party, rf.fromDate.ToString("dd-MM-yyyy"), rf.toDate.ToString("dd-MM-yyyy"));
                 return View(data);
             }
             catch (Exception ex)

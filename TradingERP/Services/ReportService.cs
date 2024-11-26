@@ -16,7 +16,7 @@ namespace TradingERP.Services
         }
 
         public List<RegisterMaster> RgReportByParty(string usmId,string party,string fromDate,string toDate) {
-            
+           
             var data = new List<RegisterMaster>();
             if (party=="All")
             {
