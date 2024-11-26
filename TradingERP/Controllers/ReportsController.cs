@@ -35,26 +35,33 @@ namespace TradingERP.Controllers
         [HttpPost]
         public IActionResult RGPartyWise(string party,string fromDate,string toDate)
         {
-            if (Request.Cookies["admToken"] == null)
+            try
             {
-                return RedirectToAction("Index", "Home");
+                if (Request.Cookies["admToken"] == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                var userId = Request.Cookies["admToken"];
+                var userInfo = _userService.GetById(userId);
+                ViewData["userData"] = userInfo;
+                ViewData["partyList"] = _partyService.ActiveListByUser(userId);
+                ViewBag.party = party;
+                if (fromDate != null)
+                {
+                    ViewBag.fromDate = Convert.ToDateTime(fromDate).ToString("dd-MM-yyyy");
+                }
+                if (toDate != null)
+                {
+                    ViewBag.toDate = Convert.ToDateTime(toDate).ToString("dd-MM-yyyy");
+                }
+
+                var data = _reportService.RgReportByParty(userId, party, fromDate, toDate);
+                return View(data);
             }
-            var userId = Request.Cookies["admToken"];
-            var userInfo = _userService.GetById(userId);
-            ViewData["userData"] = userInfo;
-            ViewData["partyList"] = _partyService.ActiveListByUser(userId);
-            ViewBag.party = party;
-            if (fromDate != null)
+            catch (Exception ex)
             {
-                ViewBag.fromDate = Convert.ToDateTime(fromDate).ToString("dd-MM-yyyy");
+                return Json(ex.Message);
             }
-            if(toDate != null)
-            {
-                ViewBag.toDate = Convert.ToDateTime(toDate).ToString("dd-MM-yyyy");
-            }
-            
-            var data = _reportService.RgReportByParty(userId, party,fromDate,toDate);
-            return View(data);
         }
     }
 }
