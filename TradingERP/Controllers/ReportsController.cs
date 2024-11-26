@@ -40,7 +40,7 @@ namespace TradingERP.Controllers
         {
             try
             {
-
+                return Json(rf);
                 
                 var userId = Request.Cookies["admToken"];
                 var userInfo = _userService.GetById(userId);
