@@ -47,11 +47,11 @@ namespace TradingERP.Controllers
                 ViewData["userData"] = userInfo;
                 ViewData["partyList"] = _partyService.ActiveListByUser(userId);
                 ViewBag.party = rf.party;
-                ViewBag.fDate = rf.fromDate.ToString("dd-MM-yyyy");
-                ViewBag.tDate = rf.toDate.ToString("dd-MM-yyyy");
-                var fd = rf.fromDate.ToString("dd-MM-yyyy");
-                var td = rf.toDate.ToString("dd-MM-yyyy");
-                var data = _reportService.RgReportByParty(userId, rf.party, fd, td);
+                ViewBag.fDate = rf.fromDate;
+                ViewBag.tDate = rf.toDate;
+                var fd = Convert.ToDateTime(rf.fromDate).ToString("dd-MM-yyyy");
+                var td = Convert.ToDateTime(rf.toDate).ToString("dd-MM-yyyy");
+                var data = _reportService.RgReportByParty(userId, rf.party, rf.fromDate, rf.toDate);
                 return View(data);
             }
             catch (Exception ex)
