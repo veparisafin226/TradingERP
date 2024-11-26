@@ -37,6 +37,7 @@ namespace TradingERP.Controllers
         {
             try
             {
+                
                 if (Request.Cookies["admToken"] == null)
                 {
                     return RedirectToAction("Index", "Home");
@@ -60,7 +61,7 @@ namespace TradingERP.Controllers
             }
             catch (Exception ex)
             {
-                return Json(ex.Message);
+                return Json(ex.Message+" => "+fromDate+" => "+toDate);
             }
         }
     }
