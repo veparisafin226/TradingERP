@@ -20,12 +20,12 @@ namespace TradingERP.Services
             if (party=="All")
             {
                 data = registerMaster.Find(t => t.UsmId == usmId).ToList();
-                if (fromDate != null)
+                if (fromDate != "01-01-0001")
                 {
                     var fdate = Convert.ToDateTime(fromDate);
                     data = data.Where(t => t.RgmDate >= fdate).ToList();
                 }
-                if (toDate != null)
+                if (toDate != "01-01-0001")
                 {
                     var tdate = Convert.ToDateTime(toDate);
                     data = data.Where(t => t.RgmDate <= tdate).ToList();
@@ -34,12 +34,12 @@ namespace TradingERP.Services
             else
             {
                 data = registerMaster.Find(t => t.UsmId == usmId && t.RgmParty == party).ToList();
-                if (fromDate != null)
+                if (fromDate != "01-01-0001")
                 {
                     var fdate = Convert.ToDateTime(fromDate);
                     data = data.Where(t => t.RgmDate >= fdate).ToList();
                 }
-                if (toDate != null)
+                if (toDate != "01-01-0001")
                 {
                     var tdate = Convert.ToDateTime(toDate);
                     data = data.Where(t => t.RgmDate <= tdate).ToList();

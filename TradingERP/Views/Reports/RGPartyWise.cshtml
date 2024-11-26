@@ -147,7 +147,7 @@
                         <th colspan="5" class="text-right"></th>
                         <th>@totalQty</th>
                         <th></th>
-                        <th>@totalAmount</th>
+                            <th>@Math.Round(totalAmount,2)</th>
                     </tr>
                     <tr class="tblFooter">
                         <th colspan="7" >
@@ -163,7 +163,7 @@
                             
                         </th>
                         <th id="totalAmount">
-                            <h1 id="totalAmount" style="text-align:right;font-size:18px;font-weight:bold;">@totalAmount</h1>
+                            <h1 id="totalAmount" style="text-align:right;font-size:18px;font-weight:bold;">@Math.Round(totalAmount,2)</h1>
                             </th>
                     </tr>
                 }
