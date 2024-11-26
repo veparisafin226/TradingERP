@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using TradingERP.Models;
 using TradingERP.Services;
 
 namespace TradingERP.Controllers
@@ -35,7 +36,7 @@ namespace TradingERP.Controllers
         }
 
         [HttpPost]
-        public IActionResult RGPartyWise(string party,DateTime fromDate,DateTime toDate)
+        public IActionResult RGPartyWise(ReportFilter rf)
         {
             try
             {
@@ -45,15 +46,17 @@ namespace TradingERP.Controllers
                 var userInfo = _userService.GetById(userId);
                 ViewData["userData"] = userInfo;
                 ViewData["partyList"] = _partyService.ActiveListByUser(userId);
-                ViewBag.party = party;
-                ViewBag.fDate = fromDate.ToString("dd-MM-yyyy");
-                ViewBag.tDate = toDate.ToString("dd-MM-yyyy");
-                var data = _reportService.RgReportByParty(userId, party, fromDate.ToString("dd-MM-yyyy"), toDate.ToString("dd-MM-yyyy"));
+                ViewBag.party = rf.party;
+                ViewBag.fDate = rf.fromDate.ToString("dd-MM-yyyy");
+                ViewBag.tDate = rf.toDate.ToString("dd-MM-yyyy");
+                var fd = rf.fromDate.ToString("dd-MM-yyyy");
+                var td = rf.toDate.ToString("dd-MM-yyyy");
+                var data = _reportService.RgReportByParty(userId, rf.party, fd, td);
                 return View(data);
             }
             catch (Exception ex)
             {
-                return Json(ex.Message+" => "+fromDate+" => "+toDate);
+                return RedirectToAction("RGPartyWise");
             }
         }
     }
