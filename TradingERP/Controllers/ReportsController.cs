@@ -48,11 +48,11 @@ namespace TradingERP.Controllers
                 ViewBag.party = party;
                 if (fromDate.ToString("dd-MM-yyyy") != "01-01-0001")
                 {
-                    ViewBag.fromDate = fromDate.ToString("dd-MM-yyyy");
+                    ViewBag.fDate = fromDate.ToString("dd-MM-yyyy");
                 }
                 if (toDate.ToString("dd-MM-yyyy") != "01-01-0001")
                 {
-                    ViewBag.toDate = toDate.ToString("dd-MM-yyyy");
+                    ViewBag.tDate = toDate.ToString("dd-MM-yyyy");
                 }
 
                 var data = _reportService.RgReportByParty(userId, party, fromDate.ToString("dd-MM-yyyy"), toDate.ToString("dd-MM-yyyy"));
