@@ -16,17 +16,36 @@ namespace TradingERP.Services
         }
 
         public List<RegisterMaster> RgReportByParty(string usmId,string party,string fromDate,string toDate) {
-            var data = registerMaster.Find(t => t.UsmId == usmId && t.RgmParty == party).ToList();
-            if(fromDate!=null)
+            var data = new List<RegisterMaster>();
+            if (party=="All")
             {
-                var fdate = Convert.ToDateTime(fromDate);
-                data = data.Where(t => t.RgmDate >= fdate).ToList();
+                data = registerMaster.Find(t => t.UsmId == usmId).ToList();
+                if (fromDate != null)
+                {
+                    var fdate = Convert.ToDateTime(fromDate);
+                    data = data.Where(t => t.RgmDate >= fdate).ToList();
+                }
+                if (toDate != null)
+                {
+                    var tdate = Convert.ToDateTime(toDate);
+                    data = data.Where(t => t.RgmDate <= tdate).ToList();
+                }
             }
-            if (toDate != null)
+            else
             {
-                var tdate = Convert.ToDateTime(toDate);
-                data = data.Where(t=>t.RgmDate<=tdate).ToList();
+                data = registerMaster.Find(t => t.UsmId == usmId && t.RgmParty == party).ToList();
+                if (fromDate != null)
+                {
+                    var fdate = Convert.ToDateTime(fromDate);
+                    data = data.Where(t => t.RgmDate >= fdate).ToList();
+                }
+                if (toDate != null)
+                {
+                    var tdate = Convert.ToDateTime(toDate);
+                    data = data.Where(t => t.RgmDate <= tdate).ToList();
+                }
             }
+            
             return data.OrderBy(t=>t.RgmDate).ToList();
         }
     }
