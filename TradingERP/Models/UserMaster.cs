@@ -13,6 +13,9 @@ namespace TradingERP.Models
         [Display(Name ="Name")]
         [Required]
         public string UsmName { get; set; }
+        [Display(Name = "Propriter")]
+        [Required]
+        public string UsmPropriter { get; set; }
         [Display(Name = "Email")]
         [Required]
         public string UsmEmail { get; set; }

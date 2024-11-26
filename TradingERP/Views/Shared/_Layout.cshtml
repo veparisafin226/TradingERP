@@ -21,7 +21,7 @@
     <link href="~/css/datepicker1.css" rel="stylesheet" />
     <style>
         table{
-            font-size:13px !important;
+            font-size:11px !important;
         }
     </style>
     <script src="~/js/jquery.min.js"></script>
@@ -112,6 +112,23 @@
                         <a class="collapse-item" asp-action="Index" asp-controller="Diesel">
                             <span>Diesel Entry</span>
                         </a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseReport" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Register Reports:</h6>
+                        <a class="collapse-item" asp-action="RGPartyWise" asp-controller="Reports">
+                            <span>Party Wise</span>
+                        </a>
+                       
                     </div>
                 </div>
             </li>

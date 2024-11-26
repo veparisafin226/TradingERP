@@ -18,6 +18,7 @@ builder.Services.AddSingleton<ItemService>();
 builder.Services.AddSingleton<PumpService>();
 builder.Services.AddSingleton<RegisterService>();
 builder.Services.AddSingleton<DieselService>();
+builder.Services.AddSingleton<ReportService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

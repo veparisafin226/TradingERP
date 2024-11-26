@@ -19,6 +19,9 @@
                     @Html.DisplayNameFor(model => model.UsmName)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.UsmPropriter)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.UsmEmail)
                 </th>
                 <th>
@@ -42,6 +45,9 @@
                         @Html.DisplayFor(modelItem => item.UsmName)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.UsmPropriter)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.UsmEmail)
                     </td>
                     <td>
@@ -54,9 +60,9 @@
                         @Html.DisplayFor(modelItem => item.UsmStatus)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.UsmId  }) |
+                       
+                        @Html.ActionLink("Delete", "Delete", new {  id=item.UsmId  })
                     </td>
                 </tr>
             }
