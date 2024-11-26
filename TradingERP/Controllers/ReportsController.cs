@@ -49,6 +49,7 @@ namespace TradingERP.Controllers
                 ViewBag.party = rf.party;
                 ViewBag.fDate = rf.fromDate;
                 ViewBag.tDate = rf.toDate;
+                return Json(ViewBag.fromDate);
                 var fd = Convert.ToDateTime(rf.fromDate).ToString("dd-MM-yyyy");
                 var td = Convert.ToDateTime(rf.toDate).ToString("dd-MM-yyyy");
                 var data = _reportService.RgReportByParty(userId, rf.party, rf.fromDate, rf.toDate);
