@@ -6,6 +6,14 @@
     double totalAmount = 0;
     double gstAmount = 0;
     var user = ViewData["userData"] as UserMaster;
+    string[] monthShortNames = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    var selectedMY = "";
+    if(ViewBag.month!=null)
+    {
+        var mn = monthShortNames[Convert.ToInt32(ViewBag.month) - 1];
+        var year = ViewBag.year;
+        selectedMY = mn + "-" + year;
+    }
 }
 
 <div class="container-fluid">
@@ -18,7 +26,7 @@
             <div class="form-group col-md-3">
                 <label>Party</label>
                 <select class="form-control" name="party">
-                    <option value="All">All</option>
+                    @* <option value="All">All</option> *@
                     @foreach (var p in ViewData["partyList"] as IEnumerable<PartyMaster>)
                     {
                         @if (ViewBag.party==p.PrtName)
@@ -33,12 +41,39 @@
                 </select>
             </div>
             <div class="form-group col-md-3">
-                <label>From Date</label>
-                <input type="text" value="@ViewBag.fDate" class="form-control datepicker-here" data-lang="en" name="fromDate" />
+                <label>Month</label>
+                <select class="form-control" name="month">
+                    @for (int i = 0; i < monthShortNames.Length; i++)
+                    {
+                        var sMonth = Convert.ToInt32(ViewBag.month);
+                        var cMonth = i + 1;
+                        if(sMonth==cMonth)
+                        {
+                            <option value="@cMonth" selected="">@monthShortNames[i]</option>
+                        }
+                        else
+                        {
+                            <option value="@cMonth">@monthShortNames[i]</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group col-md-3">
-                <label>To Date</label>
-                <input type="text" value="@ViewBag.tDate" class="form-control datepicker-here" data-lang="en" name="toDate" />
+                <label>Year</label>
+                <select name="year" class="form-control">
+                    @for(var y=2023;y<=DateTime.Now.Year;y++)
+                    {
+                        var sYear = Convert.ToInt32(ViewBag.year);
+                        if(sYear==y)
+                        {
+                            <option value="@y" selected="">@y</option>
+                        }
+                        else
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group col-md-3 mt-4 p-2">
                 <button class="btn btn-primary">Search</button>
@@ -48,129 +83,118 @@
     @if (Model != null)
     {
 
+        if(Model.Count()>=1)
+        {
+            <div class="row p-3 bg-white mt-3">
+                <div class="col-md-12">
+                    <h3>GST</h3>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>GST (in %)</label>
+                    <input type="text" value="0" class="form-control" id="gstPer" />
+                </div>
+                <div class="form-group col-md-4 mt-4 p-2">
+                    <button class="btn btn-primary" type="button" onclick="calculateGst();">Add GST</button>
+                </div>
+            </div>
 
-        <div class="row p-3 bg-white mt-3">
-       <div class="col-md-12">
-            <h3>GST</h3>
-       </div>
-       <div class="form-group col-md-4">
-           <label>GST (in %)</label>
-           <input type="text" value="0" class="form-control" id="gstPer" />
-       </div>
-       <div class="form-group col-md-4 mt-4 p-2">
-           <button class="btn btn-primary" type="button" onclick="calculateGst();">Add GST</button>
-       </div>
-   </div>
-   
-    <div class="row p-3">
-        <div class="col-md-12 m-3 text-right">
-            <button class="btn btn-sm btn-success" type="button" id="btnExcel">Export to Excel</button>
-        </div>
-        <table id="tblReport" class="table table-bordered bg-white p-2">
-            <thead>
-                <tr>
-                    <th colspan="4">
-                        <h1 style="text-align:center;font-weight:bold;font-size:18px;">@user.UsmPropriter</h1>
-                    </th>
-                    <th colspan="4">
-                        
-                        <h1 style="text-align:center;font-weight:bold;font-size:18px;">@user.UsmContact</h1>
-                    </th>
-                </tr>
-                <tr>
-                    <th colspan="8">
-                        <h1 style="text-align:center;font-weight:bold;">@user.UsmName</h1>
-                    </th>
-                </tr>
-                <tr>
-                    <th colspan="4">PARTY NAME :- @ViewBag.party</th>
-                    
-                        @if(ViewBag.fDate != "01-01-0001" && ViewBag.tDate!="01-01-0001")
-                        {
-                        <th colspan="4" class="text-right">DATE :- 
-                        @ViewBag.fDate to @ViewBag.tDate
-                        </th>
-                    }
-                    else if (ViewBag.fDate == "01-01-0001" && ViewBag.tDate != "01-01-0001")
-                    {
-                        <th colspan="4" class="text-right">
-                            DATE :-
-                            All to @ViewBag.tDate
-                        </th>
-                    }
-                    else if (ViewBag.fDate != "01-01-0001" && ViewBag.tDate == "01-01-0001")
-                    {
-                        <th colspan="4" class="text-right">
-                            DATE :-
-                            @ViewBag.fDate to All
-                        </th>
-                    }
-                    else
-                    {
-                        <th colspan="4" class="text-right">
-                            DATE :- All
-                        </th>
-                    }
-                </tr>
-                <tr>
-                    <th>SR.No</th>
-                    <th>DATE</th>
-                    <th>VEL NO</th>
-                    <th>SIDE</th>
-                    <th>ITEM</th>
-                    <th>QTY</th>
-                    <th>PRICE</th>
-                    <th>TOTAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if(Model != null)
-                {
-                    var srNo = 0;
-                    foreach(var item in Model)
-                    {
-                        srNo++;
-                        totalQty = totalQty + Convert.ToDouble(item.RgmQty);
-                        totalAmount = totalAmount + Convert.ToDouble(item.RgmTotal);
+            <div class="row p-3">
+                <div class="col-md-12 m-3 text-right">
+                    <button class="btn btn-sm btn-success" type="button" id="btnExcel">Export to Excel</button>
+                </div>
+                <table id="tblReport" class="table table-bordered bg-white p-2">
+                    <thead>
                         <tr>
-                            <td>@srNo</td>
-                            <td>@item.RgmDate.ToString("dd-MM-yyyy")</td>
-                            <td>@item.RgmVehicleNo</td>
-                            <td>@item.RgmSite</td>
-                            <td>@item.RgmItem</td>
-                            <td>@item.RgmQty</td>
-                            <td>@item.RgmRate</td>
-                            <td>@item.RgmTotal</td>
+                            <th colspan="4">
+                                <h1 style="text-align:center;font-weight:bold;font-size:18px;">@user.UsmPropriter</h1>
+                            </th>
+                            <th colspan="4">
+
+                                <h1 style="text-align:center;font-weight:bold;font-size:18px;">@user.UsmContact</h1>
+                            </th>
                         </tr>
-                    }
-                    <tr class="tblFooter">
-                        <th colspan="5" class="text-right"></th>
-                        <th>@totalQty</th>
-                        <th></th>
-                            <th>@Math.Round(totalAmount,2)</th>
-                    </tr>
-                    <tr class="tblFooter">
-                        <th colspan="7" >
-                            <h1 style="text-align:right;font-size:18px;font-weight:bold;">GST</h1>
-                        </th>
-                        <th id="gstAmount">
-                            <h1 id="gstAmount" style="text-align:right;font-size:18px;font-weight:bold;">@gstAmount</h1>
+                        <tr>
+                            <th colspan="8">
+                                <h1 style="text-align:center;font-weight:bold;">@user.UsmName</h1>
                             </th>
-                    </tr>
-                    <tr class="tblFooter">
-                        <th colspan="7">
-                            <h1 style="text-align:right;font-size:18px;font-weight:bold;">Total</h1>
-                            
-                        </th>
-                        <th id="totalAmount">
-                            <h1 id="totalAmount" style="text-align:right;font-size:18px;font-weight:bold;">@Math.Round(totalAmount,2)</h1>
+                        </tr>
+                        <tr>
+                            <th colspan="4">PARTY NAME :- @ViewBag.party</th>
+
+                            <th colspan="4" class="text-right">
+                                @selectedMY
                             </th>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
+
+                        </tr>
+                        <tr>
+                            <th>SR.No</th>
+                            <th>DATE</th>
+                            <th>VEL NO</th>
+                            <th>SIDE</th>
+                            <th>ITEM</th>
+                            <th>QTY</th>
+                            <th>PRICE</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            var srNo = 0;
+                            foreach (var item in Model)
+                            {
+                                srNo++;
+                                totalQty = totalQty + Convert.ToDouble(item.RgmQty);
+                                totalAmount = totalAmount + Convert.ToDouble(item.RgmTotal);
+                                <tr>
+                                    <td>@srNo</td>
+                                    <td>@item.RgmDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.RgmVehicleNo</td>
+                                    <td>@item.RgmSite</td>
+                                    <td>@item.RgmItem</td>
+                                    <td>@item.RgmQty</td>
+                                    <td>@item.RgmRate</td>
+                                    <td>@item.RgmTotal</td>
+                                </tr>
+                            }
+                            <tr class="tblFooter">
+                                <th colspan="5" class="text-right"></th>
+                                <th>@totalQty</th>
+                                <th></th>
+                                <th>@Math.Round(totalAmount, 2)</th>
+                            </tr>
+                            <tr class="tblFooter">
+                                <th colspan="7">
+                                    <h1 style="text-align:right;font-size:18px;font-weight:bold;">GST</h1>
+                                </th>
+                                <th id="gstAmount">
+                                    <h1 id="gstAmount" style="text-align:right;font-size:18px;font-weight:bold;">@gstAmount</h1>
+                                </th>
+                            </tr>
+                            <tr class="tblFooter">
+                                <th colspan="7">
+                                    <h1 style="text-align:right;font-size:18px;font-weight:bold;">Total</h1>
+
+                                </th>
+                                <th id="totalAmount">
+                                    <h1 id="totalAmount" style="text-align:right;font-size:18px;font-weight:bold;">@Math.Round(totalAmount, 2)</h1>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+    else
+        {
+            <div class="row p-3 bg-white mt-3 text-center">
+                <h5 class="alert alert-danger fw-bold m-auto">
+                    Record is not available.
+                </h5>
+            </div>
+        }
+    }
 </div>
 <script src="~/js/jquery.table2excel.js"></script>
 
