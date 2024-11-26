@@ -85,20 +85,20 @@
                 <tr>
                     <th colspan="4">PARTY NAME :- @ViewBag.party</th>
                     
-                        @if(ViewBag.fromDate != null && ViewBag.toDate!=null)
+                        @if(ViewBag.fromDate != "01-01-0001" && ViewBag.toDate!="01-01-0001")
                         {
                         <th colspan="4" class="text-right">DATE :- 
                         @ViewBag.fromDate to @ViewBag.toDate
                         </th>
                     }
-                    else if (ViewBag.fromDate == null && ViewBag.toDate != null)
+                    else if (ViewBag.fromDate == "01-01-0001" && ViewBag.toDate != "01-01-0001")
                     {
                         <th colspan="4" class="text-right">
                             DATE :-
                             All to @ViewBag.toDate
                         </th>
                     }
-                    else if (ViewBag.fromDate != null && ViewBag.toDate == null)
+                    else if (ViewBag.fromDate != "01-01-0001" && ViewBag.toDate == "01-01-0001")
                     {
                         <th colspan="4" class="text-right">
                             DATE :-
