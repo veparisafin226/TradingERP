@@ -19,6 +19,20 @@ namespace TradingERP.Services
             return data;
         }
 
+        public List<RegisterMaster> MonthListByUser(string userId)
+        {
+            var data = registerMaster.Find(t => t.UsmId == userId).ToList().OrderByDescending(t => t.RgmDate).ToList();
+            data = data.Where(t=>t.RgmDate.Month == DateTime.Now.Month && t.RgmDate.Year==DateTime.Now.Year).ToList();
+            return data;
+        }
+
+        public List<RegisterMaster> MonthListByUserSearch(string userId,int month,int year)
+        {
+            var data = registerMaster.Find(t => t.UsmId == userId).ToList().OrderByDescending(t => t.RgmDate).ToList();
+            data = data.Where(t => t.RgmDate.Month == month && t.RgmDate.Year == year).ToList();
+            return data;
+        }
+
         public string Create(RegisterMaster rgm)
         {
             var response = "";

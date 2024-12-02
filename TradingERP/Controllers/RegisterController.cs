@@ -36,7 +36,23 @@ namespace TradingERP.Controllers
                 return RedirectToAction("Index", "Home");
             }
             var userId = Request.Cookies["AdmToken"];
-            var data = _registerService.ListByUser(userId);
+            ViewBag.month = DateTime.Now.Month;
+            ViewBag.year = DateTime.Now.Year;
+            var data = _registerService.MonthListByUser(userId);
+            return View(data);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int month,int year)
+        {
+            if (Request.Cookies["admToken"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var userId = Request.Cookies["AdmToken"];
+            ViewBag.month = month;
+            ViewBag.year = year;
+            var data = _registerService.MonthListByUserSearch(userId,month,year);
             return View(data);
         }
 

@@ -23,5 +23,14 @@ namespace TradingERP.Services
             data = data.Where(t=>t.RgmDate.Month==month && t.RgmDate.Year==year).ToList();
             return data.OrderBy(t=>t.RgmDate).ToList();
         }
+
+        public List<RegisterMaster> vehicleReportByParty(string usmId, string vNo, int month, int year)
+        {
+
+            var data = new List<RegisterMaster>();
+            data = registerMaster.Find(t => t.UsmId == usmId && t.RgmVehicleNo == vNo).ToList();
+            data = data.Where(t => t.RgmDate.Month == month && t.RgmDate.Year == year).ToList();
+            return data.OrderBy(t => t.RgmDate).ToList();
+        }
     }
 }

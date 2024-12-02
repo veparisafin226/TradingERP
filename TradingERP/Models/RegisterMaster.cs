@@ -45,5 +45,8 @@ namespace TradingERP.Models
         //[Display(Name = "Diesel Amount")]
         //public string RgmDieselTotal { get; set; }
         public string UsmId { get; set; }
+
+        [Display(Name = "Docket No")]
+        public string RgmDocketNo { get; set; }
     }
 }

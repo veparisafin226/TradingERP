@@ -4,15 +4,69 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var sNo = 0;
+    string[] monthShortNames = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+    var selectedMY = "";
+    if (ViewBag.month != null)
+    {
+        var mn = monthShortNames[Convert.ToInt32(ViewBag.month) - 1];
+        var year = ViewBag.year;
+        selectedMY = mn + "-" + year;
+    }
 }
 
 <div class="container-fluid">
 
 <h1>Register</h1>
 
-    <p class="float-right btn btn-primary">
-        <a class="text-white" asp-action="Create">Create New</a>
-    </p>
+    
+    <div>
+       
+        <form class="row bg-white p-2 m-3" method="post">
+            <div class="col-12">
+                <p class="btn btn-primary float-right">
+                    <a class="text-white" asp-action="Create">Create New</a>
+                </p>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Month</label>
+                <select class="form-control" name="month">
+                    @for (int i = 0; i < monthShortNames.Length; i++)
+                    {
+                        var sMonth = Convert.ToInt32(ViewBag.month);
+                        var cMonth = i + 1;
+                        if (sMonth == cMonth)
+                        {
+                            <option value="@cMonth" selected="">@monthShortNames[i]</option>
+                        }
+                        else
+                        {
+                            <option value="@cMonth">@monthShortNames[i]</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Year</label>
+                <select name="year" class="form-control">
+                    @for (var y = 2023; y <= DateTime.Now.Year; y++)
+                    {
+                        var sYear = Convert.ToInt32(ViewBag.year);
+                        if (sYear == y)
+                        {
+                            <option value="@y" selected="">@y</option>
+                        }
+                        else
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group col-md-3 mt-4 p-2">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
     <table class="table bg-white p-2">
     <thead>
         <tr>
@@ -26,6 +80,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.RgmSite)
             </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RgmDocketNo)
+                </th>
             <th>
                 @Html.DisplayNameFor(model => model.RgmVehicleNo)
             </th>
@@ -72,6 +129,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RgmSite)
             </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RgmDocketNo)
+                    </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RgmVehicleNo)
             </td>

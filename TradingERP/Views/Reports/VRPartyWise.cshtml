@@ -18,7 +18,7 @@
 
 <div class="container-fluid">
 
-    <h1>Party vise Report</h1>
+    <h1>Vehicle vise Reports</h1>
     
     
     <div >
@@ -27,15 +27,15 @@
                 <label>Party</label>
                 <select class="form-control" name="party">
                     @* <option value="All">All</option> *@
-                    @foreach (var p in ViewData["partyList"] as IEnumerable<PartyMaster>)
+                    @foreach (var p in ViewData["vehicleNoList"] as IEnumerable<VehicleNoMaster>)
                     {
-                        @if (ViewBag.party==p.PrtName)
+                        @if (ViewBag.vNo==p.VnmNo)
                         {
-                            <option value="@p.PrtName" selected>@p.PrtName</option>
+                            <option value="@p.VnmNo" selected>@p.VnmNo</option>
                         }
                         else
                         {
-                            <option value="@p.PrtName">@p.PrtName</option>
+                            <option value="@p.VnmNo">@p.VnmNo</option>
                         }
                     }
                 </select>
@@ -85,18 +85,7 @@
 
         if(Model.Count()>=1)
         {
-            <div class="row p-3 bg-white mt-3">
-                <div class="col-md-12">
-                    <h3>GST</h3>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>GST (in %)</label>
-                    <input type="text" value="0" class="form-control" id="gstPer" />
-                </div>
-                <div class="form-group col-md-4 mt-4 p-2">
-                    <button class="btn btn-primary" type="button" onclick="calculateGst();">Add GST</button>
-                </div>
-            </div>
+           
 
             <div class="row p-3">
                 <div class="col-md-12 m-3 text-right">
@@ -105,7 +94,7 @@
                 <table id="tblReport" class="table table-bordered bg-white p-2">
                     <thead>
                         <tr>
-                            <th colspan="5">
+                            <th colspan="4">
                                 <h1 style="text-align:center;font-weight:bold;font-size:18px;">@user.UsmPropriter</h1>
                             </th>
                             <th colspan="4">
@@ -114,12 +103,12 @@
                             </th>
                         </tr>
                         <tr>
-                            <th colspan="9">
+                            <th colspan="8">
                                 <h1 style="text-align:center;font-weight:bold;">@user.UsmName</h1>
                             </th>
                         </tr>
                         <tr>
-                            <th colspan="5">PARTY NAME :- @ViewBag.party</th>
+                            <th colspan="4">VEHICLE NO :- @ViewBag.vNO</th>
 
                             <th colspan="4" class="text-right">
                                 @selectedMY
@@ -131,7 +120,6 @@
                             <th>DATE</th>
                             <th>VEL NO</th>
                             <th>SIDE</th>
-                            <th>DOCKET NO</th>
                             <th>ITEM</th>
                             <th>QTY</th>
                             <th>PRICE</th>
@@ -152,7 +140,6 @@
                                     <td>@item.RgmDate.ToString("dd-MM-yyyy")</td>
                                     <td>@item.RgmVehicleNo</td>
                                     <td>@item.RgmSite</td>
-                                    <td>@item.RgmDocketNo</td>
                                     <td>@item.RgmItem</td>
                                     <td>@item.RgmQty</td>
                                     <td>@item.RgmRate</td>
@@ -160,21 +147,14 @@
                                 </tr>
                             }
                             <tr class="tblFooter">
-                                <th colspan="6" class="text-right"></th>
+                                <th colspan="5" class="text-right"></th>
                                 <th></th>
                                 <th></th>
                                 <th>@Math.Round(totalAmount, 2)</th>
                             </tr>
+                          
                             <tr class="tblFooter">
-                                <th colspan="8">
-                                    <h1 style="text-align:right;font-size:18px;font-weight:bold;">GST</h1>
-                                </th>
-                                <th id="gstAmount">
-                                    <h1 id="gstAmount" style="text-align:right;font-size:18px;font-weight:bold;">@gstAmount</h1>
-                                </th>
-                            </tr>
-                            <tr class="tblFooter">
-                                <th colspan="8">
+                                <th colspan="7">
                                     <h1 style="text-align:right;font-size:18px;font-weight:bold;">Total</h1>
 
                                 </th>
@@ -203,24 +183,10 @@
 
 <script>
    
-    function calculateGst(){
-        try{
-            var totalAmount = '@totalAmount';
-            var gstPer = $("#gstPer").val();
-            var gstAmount = parseFloat(parseFloat(totalAmount) * parseFloat(gstPer) / 100).toFixed(2);
-            $("#gstAmount").text(gstAmount);
-            var ta = parseFloat(totalAmount) + parseFloat(gstAmount);
-            $("#totalAmount").text(parseFloat(ta).toFixed(2));
-        }
-        catch(e){
-            alert("Error in calculation.");
-            $("#gstAmount").text(0);
-        }
-       
-    }
+   
    
     $("#btnExcel").click(function () {
-        var fleName = '@ViewBag.party' + '.xls';
+        var fleName = '@ViewBag.vNo' + '.xls';
         var table = $('#tblReport');
         $(table).table2excel({
             filename: fleName
